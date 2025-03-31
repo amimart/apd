@@ -839,6 +839,7 @@ func (c *Context) Ln(d, x *Decimal) (Condition, error) {
 	if err := ed.Err(); err != nil {
 		return 0, err
 	}
+	fmt.Println("FINAL ROUNDING OF LN", tmp1.String())
 	res := c.round(d, &tmp1)
 	res |= Inexact
 	return c.goError(res)

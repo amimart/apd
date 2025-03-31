@@ -14,6 +14,8 @@
 
 package apd
 
+import "fmt"
+
 // Round sets d to rounded x, rounded to the precision specified by c. If c
 // has zero precision, no rounding will occur. If c has no Rounding specified,
 // RoundHalfUp is used.
@@ -96,7 +98,9 @@ func (r Rounder) Round(c *Context, d, x *Decimal, disableIfPrecisionZero bool) C
 			var discard Decimal
 			discard.Coeff.Set(&m)
 			discard.Exponent = int32(-diff)
+			fmt.Println("SHOULD ROUND ADD ONE", r, y.String(), x.Negative, discard.Cmp(decimalHalf))
 			if r.ShouldAddOne(&y, x.Negative, discard.Cmp(decimalHalf)) {
+				fmt.Println("ROUND ADDING ONE", r, y.String(), x.Negative, discard.Cmp(decimalHalf))
 				roundAddOne(&y, &diff)
 			}
 		}
