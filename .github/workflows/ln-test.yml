@@ -3,7 +3,7 @@ name: Ln test
 on:
   push:
     branches:
-      - *
+      - '*'
 
 jobs:
   build:
