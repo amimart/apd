@@ -759,6 +759,7 @@ func (c *Context) Ln(d, x *Decimal) (Condition, error) {
 	}
 
 	if usePowerSeries {
+		fmt.Println("use power series")
 		// We use the power series:
 		//   ln(1+x) = 2 sum [ 1 / (2n+1) * (x / (x+2))^(2n+1) ]
 		//
@@ -798,12 +799,13 @@ func (c *Context) Ln(d, x *Decimal) (Condition, error) {
 			}
 		}
 	} else {
+		fmt.Println("use halley's iteration")
 		// Use Halley's Iteration.
 		// We use a bit more precision than the context asks for in newLoop because
 		// this is not the final result.
 		for loop := nc.newLoop("ln", x, c.Precision+1, 1); ; {
 			// tmp1 = a_n (either from initial estimate or last iteration)
-
+			fmt.Println("Halley's iteration:", tmp1.String(), tmp2.String(), tmp3.String(), tmp4.String())
 			// tmp2 = exp(a_n)
 			ed.Exp(&tmp2, &tmp1)
 
